@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace Program
 {
     class Program
@@ -23,10 +24,11 @@ namespace Program
 
                 AccountList.Add(new CD_Account(accNumber, interest, balance, maturity));
             }
-            //var orderedList = from element in AccountList
-            //            orderby element.getBalance()
-            //            select element;
-            foreach (var Account in AccountList)
+            var orderedList = from element in AccountList //sorts list by balance
+                              orderby element.getBalance()
+                              select element;
+            orderedList.Reverse(); //reverse list so it will be decreaasing order
+            foreach (var Account in orderedList) //prints contents
             {
                 Account.toString();
                 Console.WriteLine("If you wish to Deposit or Withdraw write operation name and amount on next line,\n otherwise press any key");
